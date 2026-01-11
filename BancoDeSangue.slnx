@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="BancoDeSangue.API/BancoDeSangue.API.csproj" />
+  <Project Path="BancoDeSangue.Application/BancoDeSangue.Application.csproj" Id="6fa57299-9b5a-494b-93a7-b4bdd8d5a4d5" />
+  <Project Path="BancoDeSangue.Core/BancoDeSangue.Core.csproj" Id="dbbb3522-987a-40d3-9867-f3682a9ea7ad" />
+  <Project Path="BancoDeSangue.Infrastructure/BancoDeSangue.Infrastructure.csproj" Id="0b07c4f7-d522-4ad7-8b3b-87ca4d084441" />
+</Solution>

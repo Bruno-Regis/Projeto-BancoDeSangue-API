@@ -1,4 +1,6 @@
 ﻿using BancoDeSangue.Core.Repositories;
+using BancoDeSangue.Infrastructure.ExternalServices;
+using BancoDeSangue.Infrastructure.ExternalServices.Interfaces;
 using BancoDeSangue.Infrastructure.Persistence;
 using BancoDeSangue.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +16,8 @@ namespace BancoDeSangue.Infrastructure
         {
             services
                 .AddRepositories()
-                .AddData(configuration);
+                .AddData(configuration)
+                .AddExternalServices();
 
             return services;
         }
@@ -32,6 +35,17 @@ namespace BancoDeSangue.Infrastructure
              services.AddScoped<IDoadorRepository, DoadorRepository>();
             // services.AddScoped<IDoacaoRepository, DoacaoRepository>();
             // services.AddScoped<IEstoqueSangueRepository, EstoqueSangueRepository>();
+            return services;
+        }
+
+        private static IServiceCollection AddExternalServices(this IServiceCollection services)
+        {
+            services.AddHttpClient<ICepService, CepService>(client =>
+            {
+                client.BaseAddress = new Uri("https://viacep.com.br/");
+                client.Timeout = TimeSpan.FromSeconds(10);
+            });
+
             return services;
         }
 

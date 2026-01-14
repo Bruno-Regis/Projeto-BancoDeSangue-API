@@ -22,7 +22,6 @@ namespace BancoDeSangue.Application.Services
             var model = doadores
                 .Select(d => DoadorItemViewModel.FromEntity(d))
                 .ToList();
-
             return ResultViewModel<List<DoadorItemViewModel>>.Success(model);
         }
 

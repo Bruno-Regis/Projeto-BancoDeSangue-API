@@ -17,6 +17,16 @@ namespace BancoDeSangue.API.ExceptionHandler
                         error = domainException.Message
                     }, cancellationToken);
                     return true;
+
+                case ExternalServiceException externalServiceException:
+                    
+                    httpContext.Response.StatusCode = StatusCodes.Status503ServiceUnavailable;
+                    await httpContext.Response.WriteAsJsonAsync(new
+                    {
+                        error = externalServiceException.Message
+                    }, cancellationToken);
+                    return true;
+
                 default:
                     httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     await httpContext.Response.WriteAsJsonAsync(new

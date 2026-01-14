@@ -11,4 +11,8 @@
     <ProjectReference Include="..\BancoDeSangue.Infrastructure\BancoDeSangue.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
 </Project>

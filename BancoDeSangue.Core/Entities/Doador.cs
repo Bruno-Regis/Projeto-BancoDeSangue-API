@@ -1,4 +1,5 @@
 ﻿
+using BancoDeSangue.Core.Enums;
 using BancoDeSangue.Core.Exceptions;
 
 namespace BancoDeSangue.Core.Entities
@@ -6,8 +7,20 @@ namespace BancoDeSangue.Core.Entities
     public class Doador : BaseEntity
     {
         private Doador() { }
-        public Doador(string nome, string email, DateTime dataNascimento, string genero, double peso, string tipoSanguineo, string fatorRh, Endereco endereco)
+        public Doador(string nome, string email, DateTime dataNascimento, Genero genero, double peso, TipoSanguineo tipoSanguineo, FatorRh fatorRh, Endereco endereco)
         {
+            if (string.IsNullOrWhiteSpace(nome))
+                throw new DomainException("Nome é obrigatório");
+
+            if (string.IsNullOrWhiteSpace(email))
+                throw new DomainException("Email é obrigatório");
+
+            if (peso <= 0)
+                throw new DomainException("Peso deve ser maior que zero");
+
+            if (dataNascimento >= DateTime.Now)
+                throw new DomainException("Data de nascimento inválida");
+
             Nome = nome;
             Email = email;
             DataNascimento = dataNascimento;
@@ -19,13 +32,13 @@ namespace BancoDeSangue.Core.Entities
             Endereco = endereco;
         }
 
-        public String Nome { get; private set; }
+        public string Nome { get; private set; }
         public string Email { get; private set; }
         public DateTime DataNascimento { get; private set; }
-        public string Genero { get; private set; }
+        public Genero Genero { get; private set; }
         public double Peso { get; private set; }
-        public string TipoSanguineo { get; private set; }
-        public string FatorRh { get; private set; }
+        public TipoSanguineo TipoSanguineo { get; private set; }
+        public FatorRh FatorRh { get; private set; }
         public List<Doacao> Doacoes { get; private set; }
         public Endereco Endereco { get; private set; }
 
@@ -37,6 +50,18 @@ namespace BancoDeSangue.Core.Entities
                 throw new DomainException("Doador precisa ter no mínimo 18 anos");
             if(Peso < 50)
                 throw new DomainException("Doador precisa ter no mínimo 50kg");
+
+            if(Doacoes.Count > 0)
+            {
+                var ultimaDoacao = Doacoes.OrderByDescending(d => d.DataDoacao).First();
+                var diferencaDias = (DateTime.Now - ultimaDoacao.DataDoacao).TotalDays;
+                if(Genero == Genero.Masculino && diferencaDias < 60)
+                    throw new DomainException("Doador só pode realizar uma nova doação após 60 dias da última doação");
+                if (Genero == Genero.Feminino  && diferencaDias < 90)
+                    throw new DomainException("Doador só pode realizar uma nova doação após 90 dias da última doação");
+                if(Genero == Genero.Outro && diferencaDias < 90)
+                    throw new DomainException("Doador só pode realizar uma nova doação após 90 dias da última doação");
+            }
         }       
     }
 }

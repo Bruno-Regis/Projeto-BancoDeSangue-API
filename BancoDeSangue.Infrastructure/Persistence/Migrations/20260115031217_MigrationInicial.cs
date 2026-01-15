@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BancoDeSangue.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimeiraMigration : Migration
+    public partial class MigrationInicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,17 +17,17 @@ namespace BancoDeSangue.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Genero = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Peso = table.Column<double>(type: "float", nullable: false),
-                    TipoSanguineo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FatorRh = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Endereco_Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Endereco_Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Endereco_Estado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Endereco_CEP = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Genero = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Peso = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    TipoSanguineo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    FatorRh = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Endereco_Logradouro = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Endereco_Cidade = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Endereco_Estado = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Endereco_CEP = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -42,8 +42,8 @@ namespace BancoDeSangue.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TipoSanguineo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FatorRH = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoSanguineo = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    FatorRH = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     QuantidadeMl = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
@@ -80,6 +80,12 @@ namespace BancoDeSangue.Infrastructure.Persistence.Migrations
                 name: "IX_Doacoes_DoadorId",
                 table: "Doacoes",
                 column: "DoadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Estoques_TipoSanguineo_FatorRH",
+                table: "Estoques",
+                columns: new[] { "TipoSanguineo", "FatorRH" },
+                unique: true);
         }
 
         /// <inheritdoc />

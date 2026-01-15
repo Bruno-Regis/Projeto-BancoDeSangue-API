@@ -1,4 +1,5 @@
 ﻿using BancoDeSangue.Core.Entities;
+using BancoDeSangue.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace BancoDeSangue.Application.Models.ViewModels
     public class DoadorItemViewModel
     {
         public DoadorItemViewModel(string nome, string email, DateTime dataNascimento,
-            string genero, double peso, string tipoSanguineo, string fatorRh, string logradouro,
+            Genero genero, double peso, TipoSanguineo tipoSanguineo, FatorRh fatorRh, string logradouro,
             string cidade, string estado, string cEP)
         {
             Nome = nome;
@@ -27,10 +28,10 @@ namespace BancoDeSangue.Application.Models.ViewModels
         public String Nome { get; set; }
         public string Email { get; set; }
         public DateTime DataNascimento { get; set; }
-        public string Genero { get; set; }
+        public Genero Genero { get; set; }
         public double Peso { get; set; }
-        public string TipoSanguineo { get; set; }
-        public string FatorRh { get; set; }
+        public TipoSanguineo TipoSanguineo { get; set; }
+        public FatorRh FatorRh { get; set; }
         public string Logradouro { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }

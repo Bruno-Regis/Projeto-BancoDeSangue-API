@@ -68,29 +68,34 @@ namespace BancoDeSangue.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("FatorRh")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Genero")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.Property<double>("Peso")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Peso")
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<string>("TipoSanguineo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -110,7 +115,8 @@ namespace BancoDeSangue.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("FatorRH")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -120,9 +126,13 @@ namespace BancoDeSangue.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("TipoSanguineo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TipoSanguineo", "FatorRH")
+                        .IsUnique();
 
                     b.ToTable("Estoques");
                 });
@@ -147,19 +157,23 @@ namespace BancoDeSangue.Infrastructure.Persistence.Migrations
 
                             b1.Property<string>("CEP")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(20)
+                                .HasColumnType("nvarchar(20)");
 
                             b1.Property<string>("Cidade")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
 
                             b1.Property<string>("Estado")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
 
                             b1.Property<string>("Logradouro")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)");
 
                             b1.HasKey("DoadorId");
 

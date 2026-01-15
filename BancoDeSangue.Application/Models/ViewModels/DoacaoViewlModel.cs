@@ -1,4 +1,5 @@
 ﻿using BancoDeSangue.Core.Entities;
+using BancoDeSangue.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ namespace BancoDeSangue.Application.Models.ViewModels
 {
     public class DoacaoViewlModel
     {
-        public DoacaoViewlModel(int doadorId, DateTime dataDoacao, int quantidadeMl, string tipoSanguineo, string fatorRh)
+        public DoacaoViewlModel(int doadorId, DateTime dataDoacao, int quantidadeMl, TipoSanguineo tipoSanguineo, FatorRh fatorRh)
         {
             DoadorId = doadorId;
             DataDoacao = dataDoacao;
@@ -19,8 +20,8 @@ namespace BancoDeSangue.Application.Models.ViewModels
         public int DoadorId { get; set; }
         public DateTime DataDoacao { get; set; }
         public int QuantidadeMl { get; set; }
-        public string TipoSanguineo { get; set; }
-        public string FatorRh { get; set; }
+        public TipoSanguineo TipoSanguineo { get; set; }
+        public FatorRh FatorRh { get; set; }
 
         public static DoacaoViewlModel FromEntity(Doacao doacao)
         {

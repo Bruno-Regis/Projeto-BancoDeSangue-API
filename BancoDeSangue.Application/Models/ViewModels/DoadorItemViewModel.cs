@@ -8,10 +8,11 @@ namespace BancoDeSangue.Application.Models.ViewModels
 {
     public class DoadorItemViewModel
     {
-        public DoadorItemViewModel(string nome, string email, DateTime dataNascimento,
+        public DoadorItemViewModel(int id, string nome, string email, DateTime dataNascimento,
             Genero genero, double peso, TipoSanguineo tipoSanguineo, FatorRh fatorRh, string logradouro,
             string cidade, string estado, string cEP)
         {
+            Id = id;
             Nome = nome;
             Email = email;
             DataNascimento = dataNascimento;
@@ -25,7 +26,8 @@ namespace BancoDeSangue.Application.Models.ViewModels
             CEP = cEP;
         }
 
-        public String Nome { get; set; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
         public string Email { get; set; }
         public DateTime DataNascimento { get; set; }
         public Genero Genero { get; set; }
@@ -40,6 +42,7 @@ namespace BancoDeSangue.Application.Models.ViewModels
         public static DoadorItemViewModel FromEntity(Doador doador)
         {
             return new DoadorItemViewModel(
+                doador.Id,
                 doador.Nome,
                 doador.Email,
                 doador.DataNascimento,

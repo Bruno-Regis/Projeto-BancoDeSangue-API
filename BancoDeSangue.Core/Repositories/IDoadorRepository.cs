@@ -11,5 +11,6 @@ namespace BancoDeSangue.Core.Repositories
         Task<Doador?> GetByIdAsync(int id);
         Task<Doador?> GetDetailsByIdAsync(int id);
         Task<int> AddAsync(Doador doador);
+        Task<bool> ExistsEmailAsync(string email);
     }
 }

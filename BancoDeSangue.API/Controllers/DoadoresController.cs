@@ -39,8 +39,11 @@ namespace BancoDeSangue.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CreateDoadorInputModel model)
         {
+            
             var result = await _doadorService.Insert(model);
             
+            if(!result.IsSuccess)
+                return Conflict(result.Message);
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, model);
         }

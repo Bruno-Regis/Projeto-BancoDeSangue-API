@@ -15,6 +15,7 @@ namespace BancoDeSangue.Application
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IDoadorService, DoadorService>();
+            services.AddScoped<IEstoqueSangueService, EstoqueSangueService>();
             return services;
         }
     }

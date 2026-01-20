@@ -23,6 +23,12 @@ namespace BancoDeSangue.Infrastructure.Persistence.Repositories
             return doador.Id;
         }
 
+        public async Task<bool> ExistsEmailAsync(string email)
+        {
+            return await _context.Doadores
+                .AnyAsync(d => d.Email == email);
+        }
+
         public async Task<List<Doador>> GetAllAsync()
         {
             return await _context.Doadores.ToListAsync();

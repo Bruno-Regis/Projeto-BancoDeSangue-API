@@ -29,7 +29,7 @@ namespace BancoDeSangue.Application.Services
         {
             var doador = await _repository.GetByIdAsync(id);
 
-            if (doador == null)
+            if (doador is null)
                 return ResultViewModel<DoadorViewModel>.Error("Doador não encontrado.");
 
             var model = DoadorViewModel.FromEntity(doador);
@@ -39,6 +39,10 @@ namespace BancoDeSangue.Application.Services
 
         public async Task<ResultViewModel<int>> Insert(CreateDoadorInputModel model)
         {
+            var doadorJaExiste = await _repository.ExistsEmailAsync(model.Email);
+            if (doadorJaExiste)
+                return ResultViewModel<int>.Error("Já existe um doador com este e-mail.");
+
             var doador = model.ToEntity();
 
             await _repository.AddAsync(doador);

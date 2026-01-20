@@ -91,13 +91,20 @@ namespace BancoDeSangue.Infrastructure.Persistence
                     .HasConversion<string>()
                     .HasMaxLength(20)
                     .IsRequired();
+
                 e.Property(es => es.FatorRH)
                     .HasConversion<string>()
                     .HasMaxLength(10)
                     .IsRequired();
+
                 e.Property(es => es.QuantidadeMl)
                     .HasColumnType("int")
                     .IsRequired();
+
+                e.Property(es => es.QuantidadeMinimaMl)
+                    .HasDefaultValue(5000)    
+                    .IsRequired();
+
 
                 // Índice único para garantir apenas um registro por tipo+fator
                 e.HasIndex(es => new { es.TipoSanguineo, es.FatorRH })

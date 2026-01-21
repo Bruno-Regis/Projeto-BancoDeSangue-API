@@ -33,7 +33,7 @@ namespace BancoDeSangue.Infrastructure
         private static IServiceCollection AddRepositories(this IServiceCollection services)
         {
              services.AddScoped<IDoadorRepository, DoadorRepository>();
-            // services.AddScoped<IDoacaoRepository, DoacaoRepository>();
+             services.AddScoped<IDoacaoRepository, DoacaoRepository>();
              services.AddScoped<IEstoqueSangueRepository, EstoqueSangueRepository>();
             return services;
         }

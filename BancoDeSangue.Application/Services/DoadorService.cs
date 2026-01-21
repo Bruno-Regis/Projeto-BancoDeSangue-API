@@ -37,7 +37,7 @@ namespace BancoDeSangue.Application.Services
             return ResultViewModel<DoadorViewModel>.Success(model);
         }
 
-        public async Task<ResultViewModel<int>> Insert(CreateDoadorInputModel model)
+        public async Task<ResultViewModel<int>> InsertAsync(CreateDoadorInputModel model)
         {
             var doadorJaExiste = await _repository.ExistsEmailAsync(model.Email);
             if (doadorJaExiste)

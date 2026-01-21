@@ -37,6 +37,7 @@ namespace BancoDeSangue.Infrastructure.Persistence.Repositories
         public async Task<Doador?> GetByIdAsync(int id)
         {
             return await _context.Doadores
+                .Include(d => d.Doacoes)
                 .SingleOrDefaultAsync(d => d.Id == id);
         }
 

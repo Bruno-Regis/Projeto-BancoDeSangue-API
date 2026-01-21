@@ -29,6 +29,13 @@ namespace BancoDeSangue.Infrastructure.Persistence.Repositories
                 .AnyAsync(e => e.TipoSanguineo == tipoSanguineo && e.FatorRH == fatorRh);
         }
 
+        public async Task<EstoqueSangue?> GetByTipoSanguineoAsync(TipoSanguineo tipoSanguineo, FatorRh fatorRh)
+        {
+            var estoqueSangue = await _context.Estoques
+                .SingleOrDefaultAsync(e => e.TipoSanguineo == tipoSanguineo && e.FatorRH == fatorRh);
+            return estoqueSangue;
+        }
+
         public async Task<List<EstoqueSangue>> GetAllAsync()
         {
             return await _context.Estoques.ToListAsync();
@@ -40,6 +47,12 @@ namespace BancoDeSangue.Infrastructure.Persistence.Repositories
                 .SingleOrDefaultAsync(t => t.Id == id);
 
             return estoqueSangue;
+        }
+
+        public async Task UpdateAsync(EstoqueSangue estoqueSangue)
+        {
+            _context.Estoques.Update(estoqueSangue);
+            await _context.SaveChangesAsync();
         }
     }
 }

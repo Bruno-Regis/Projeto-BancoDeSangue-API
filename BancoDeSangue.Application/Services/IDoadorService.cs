@@ -10,6 +10,6 @@ namespace BancoDeSangue.Application.Services
     {
         Task<ResultViewModel<List<DoadorItemViewModel>>> GetAllAsync();
         Task<ResultViewModel<DoadorViewModel>> GetByIdAsync(int id);
-        Task<ResultViewModel<int>> Insert(CreateDoadorInputModel model);
+        Task<ResultViewModel<int>> InsertAsync(CreateDoadorInputModel model);
     }
 }

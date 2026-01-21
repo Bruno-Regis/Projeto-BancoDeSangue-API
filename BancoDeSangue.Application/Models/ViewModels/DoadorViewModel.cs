@@ -9,7 +9,7 @@ namespace BancoDeSangue.Application.Models.ViewModels
     public class DoadorViewModel
     {
         public DoadorViewModel(int id, string nome, string email, DateTime dataNascimento, Genero genero, double peso,
-            TipoSanguineo tipoSanguineo, FatorRh fatorRh, List<DoacaoViewlModel> doacoes, string logradouro,
+            TipoSanguineo tipoSanguineo, FatorRh fatorRh, List<DoacaoViewModel> doacoes, string logradouro,
             string cidade, string estado, string cEP)
         {
             Id = id;
@@ -35,7 +35,7 @@ namespace BancoDeSangue.Application.Models.ViewModels
         public double Peso { get; set; }
         public TipoSanguineo TipoSanguineo { get; set; }
         public FatorRh FatorRh { get; set; }
-        public List<DoacaoViewlModel> Doacoes { get; set; }
+        public List<DoacaoViewModel> Doacoes { get; set; }
         public string Logradouro { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
@@ -53,8 +53,8 @@ namespace BancoDeSangue.Application.Models.ViewModels
                 doador.TipoSanguineo,
                 doador.FatorRh,
                 doador.Doacoes?
-                    .Select(d => DoacaoViewlModel.FromEntity(d))
-                    .ToList() ?? new List<DoacaoViewlModel>(),
+                    .Select(d => DoacaoViewModel.FromEntity(d))
+                    .ToList() ?? new List<DoacaoViewModel>(),
                 doador.Endereco.Logradouro,
                 doador.Endereco.Cidade,
                 doador.Endereco.Estado,

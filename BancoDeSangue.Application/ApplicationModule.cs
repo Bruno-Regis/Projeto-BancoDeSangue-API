@@ -1,4 +1,7 @@
 ﻿using BancoDeSangue.Application.Services;
+using BancoDeSangue.Application.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BancoDeSangue.Application
@@ -8,16 +11,29 @@ namespace BancoDeSangue.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             
-            services.AddServices();
+            services
+                .AddServices()
+                .AddValidation();
             return services;
         }
 
-        public static IServiceCollection AddServices(this IServiceCollection services)
+        private static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IDoadorService, DoadorService>();
             services.AddScoped<IEstoqueSangueService, EstoqueSangueService>();
             services.AddScoped<IDoacaoService, DoacaoService>();
             return services;
         }
+
+        private static IServiceCollection AddValidation(this IServiceCollection services)
+        {
+            services
+                .AddFluentValidationAutoValidation()
+                .AddValidatorsFromAssemblyContaining<CreateDoadorInputModelValidator>();
+                
+
+            return services;
+        }
+
     }
 }

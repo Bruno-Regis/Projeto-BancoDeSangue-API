@@ -50,5 +50,19 @@ namespace BancoDeSangue.Application.Services
 
             return ResultViewModel<int>.Success(estoque.Id);
         }
+
+        public async Task<ResultViewModel> RegistrarRetiradaDeSangue(int id, int quantidadeMl)
+        {
+            var estoqueSangue = await _repository.GetByIdAsync(id);
+
+            if(estoqueSangue is null)
+                return ResultViewModel.Error("Estoque de sangue não encontrado.");
+
+            estoqueSangue.RemoverSangueDoEstoque(quantidadeMl);
+
+            await _repository.UpdateAsync(estoqueSangue);
+
+            return ResultViewModel.Success();
+        }
     }
 }

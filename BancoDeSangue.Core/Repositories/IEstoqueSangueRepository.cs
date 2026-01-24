@@ -10,6 +10,7 @@ namespace BancoDeSangue.Core.Repositories
     {
         Task<List<EstoqueSangue>> GetAllAsync();
         Task<EstoqueSangue?> GetDetailsByIdAsync(int id);
+        Task<EstoqueSangue?> GetByIdAsync(int id);
         Task<EstoqueSangue?> GetByTipoSanguineoAsync(TipoSanguineo tipoSanguineo, FatorRh fatorRh);
         Task<int> AddAsync(EstoqueSangue estoqueSangue);
         Task<bool> ExistsTipoSanguineoAsync(TipoSanguineo tipoSanguineo, FatorRh fatorRh);

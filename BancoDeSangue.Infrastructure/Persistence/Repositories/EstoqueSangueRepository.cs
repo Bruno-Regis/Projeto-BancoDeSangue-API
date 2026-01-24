@@ -54,5 +54,11 @@ namespace BancoDeSangue.Infrastructure.Persistence.Repositories
             _context.Estoques.Update(estoqueSangue);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<EstoqueSangue?> GetByIdAsync(int id)
+        {
+            return await _context.Estoques
+                .SingleOrDefaultAsync(s => s.Id == id);
+        }
     }
 }

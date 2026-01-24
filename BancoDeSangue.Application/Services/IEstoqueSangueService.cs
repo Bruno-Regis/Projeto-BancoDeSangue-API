@@ -10,6 +10,7 @@ namespace BancoDeSangue.Application.Services
     {
         Task<ResultViewModel<List<EstoqueSangueItemViewModel>>> GetAllAsync();
         Task<ResultViewModel<EstoqueSangueViewModel>> GetByIdAsync(int id);
-        Task<ResultViewModel<int>> Insert(CreateEstoqueSangueInputModel model);    
+        Task<ResultViewModel<int>> Insert(CreateEstoqueSangueInputModel model);
+        Task<ResultViewModel> RegistrarRetiradaDeSangue(int id, int quantidadeMl);
     }
 }

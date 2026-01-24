@@ -1,5 +1,6 @@
 ﻿
 using BancoDeSangue.Core.Enums;
+using BancoDeSangue.Core.Events;
 using BancoDeSangue.Core.Exceptions;
 
 namespace BancoDeSangue.Core.Entities
@@ -33,7 +34,13 @@ namespace BancoDeSangue.Core.Entities
                 throw new DomainException("A quantidade a ser removida deve ser maior que zero.");
             if (quantidadeMl > QuantidadeMl)
                 throw new DomainException("Quantidade insuficiente no estoque para remoção.");
+            
             QuantidadeMl -= quantidadeMl;
+
+            if (QuantidadeMl < QuantidadeMinimaMl)
+            {
+                AddDomainEvent(new EstoqueAbaixoMinimoDomainEvent(this));
+            }
         }
 
         public void AtualizarQuantidadeMinima(int quantidadeMl)

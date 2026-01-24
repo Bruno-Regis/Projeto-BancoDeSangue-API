@@ -45,5 +45,17 @@ namespace BancoDeSangue.API.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = result.Data }, model);
         }
+
+        // PUT api/estoques/1234
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, int quantidadeMl)
+        {
+            var result = await _estoqueSangueService.RegistrarRetiradaDeSangue(id, quantidadeMl);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return NoContent();
+        }
     }
 }

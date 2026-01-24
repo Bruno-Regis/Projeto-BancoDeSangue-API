@@ -1,14 +1,16 @@
 ﻿using BancoDeSangue.Core.Entities;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BancoDeSangue.Infrastructure.Persistence
 {
     public class DoacoesDbContext : DbContext
     {
-        public DoacoesDbContext(DbContextOptions<DoacoesDbContext> options)
+        private readonly IMediator _mediator;
+        public DoacoesDbContext(DbContextOptions<DoacoesDbContext> options, IMediator mediator)
             : base(options)
         {
-
+            _mediator = mediator;
         }
 
         public DbSet<Doador> Doadores { get; set; }
@@ -71,7 +73,7 @@ namespace BancoDeSangue.Infrastructure.Persistence
 
                 });
 
-            builder 
+            builder
                 .Entity<Doacao>(e =>
                 {
                     e.HasKey(d => d.Id);
@@ -102,7 +104,7 @@ namespace BancoDeSangue.Infrastructure.Persistence
                     .IsRequired();
 
                 e.Property(es => es.QuantidadeMinimaMl)
-                    .HasDefaultValue(5000)    
+                    .HasDefaultValue(5000)
                     .IsRequired();
 
 
@@ -111,5 +113,39 @@ namespace BancoDeSangue.Infrastructure.Persistence
                     .IsUnique();
             });
         }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {          
+            await PublishDomainEventsAsync();
+
+            return await base.SaveChangesAsync(cancellationToken);
+
+        }
+
+        private async Task PublishDomainEventsAsync()
+        {
+            var entitiesWithEvents = ChangeTracker
+                .Entries<BaseEntity>()
+                .Where(e => e.Entity.DomainEvents != null &&
+                            e.Entity.DomainEvents.Any())
+                .Select(e => e.Entity)
+                .ToArray();
+
+            foreach (var entity in entitiesWithEvents)
+            {
+                var events = entity.DomainEvents!.ToArray();
+                entity.ClearDomainEvents();
+
+                foreach (var domainEvent in events)
+                    await _mediator.Publish(domainEvent);
+            }
+
+        }
     }
 }
+
+
+
+
+
+

@@ -1,7 +1,10 @@
-﻿using BancoDeSangue.Application.Services;
+﻿using BancoDeSangue.Application.Events;
+using BancoDeSangue.Application.Models.ViewModels;
+using BancoDeSangue.Application.Services;
 using BancoDeSangue.Application.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BancoDeSangue.Application
@@ -13,6 +16,7 @@ namespace BancoDeSangue.Application
             
             services
                 .AddServices()
+                .AddHandlers()
                 .AddValidation();
             return services;
         }
@@ -25,6 +29,13 @@ namespace BancoDeSangue.Application
             return services;
         }
 
+        private static IServiceCollection AddHandlers(this IServiceCollection services)
+        {
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<EstoqueAbaixoMinimoDomainEventHandler>());
+
+            //services.AddTransient<IPipelineBehavior<InsertProjectCommand, ResultViewModel<int>>, ValidateInsertProjectCommandBehavior>();
+            return services;
+        }
         private static IServiceCollection AddValidation(this IServiceCollection services)
         {
             services

@@ -26,6 +26,7 @@ namespace BancoDeSangue.Application
             services.AddScoped<IDoadorService, DoadorService>();
             services.AddScoped<IEstoqueSangueService, EstoqueSangueService>();
             services.AddScoped<IDoacaoService, DoacaoService>();
+            services.AddScoped<IRelatorioService, RelatorioService>();
             return services;
         }
 

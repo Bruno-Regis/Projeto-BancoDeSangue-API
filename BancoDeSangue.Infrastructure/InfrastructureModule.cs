@@ -35,6 +35,8 @@ namespace BancoDeSangue.Infrastructure
              services.AddScoped<IDoadorRepository, DoadorRepository>();
              services.AddScoped<IDoacaoRepository, DoacaoRepository>();
              services.AddScoped<IEstoqueSangueRepository, EstoqueSangueRepository>();
+             services.AddScoped<IHistoricoEstoqueAbaixoDoMinimoRepository, HistoricoEstoqueAbaixoDoMinimoRepository>();
+
             return services;
         }
 

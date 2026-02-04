@@ -17,12 +17,14 @@ namespace BancoDeSangue.Infrastructure.Persistence
         public DbSet<Doador> Doadores { get; set; }
         public DbSet<Doacao> Doacoes { get; set; }
         public DbSet<EstoqueSangue> Estoques { get; set; }
+        public DbSet<HistoricoEstoqueAbaixoDoMinimo> Historicos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new DoadoresConfiguration());
             builder.ApplyConfiguration(new DoacoesConfiguration());
             builder.ApplyConfiguration(new EstoqueSanguesConfiguration());
+            builder.ApplyConfiguration(new HistoricoEstoqueAbaixoDoMinimoConfiguration());
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

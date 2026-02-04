@@ -48,7 +48,7 @@ namespace BancoDeSangue.API.Controllers
 
         // PUT api/estoques/1234
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, int quantidadeMl)
+        public async Task<IActionResult> RetirarSangue([FromRoute]int id, [FromBody] int quantidadeMl)
         {
             var result = await _estoqueSangueService.RegistrarRetiradaDeSangue(id, quantidadeMl);
 

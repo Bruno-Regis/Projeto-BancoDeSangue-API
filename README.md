@@ -1,7 +1,7 @@
 # 🩸 Sistema de Gerenciamento de Banco de Sangue - API
 
-[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
-[![C#](https://img.shields.io/badge/C%23-12.0-239120?logo=c-sharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
+[![C#](https://img.shields.io/badge/C%23-14.0-239120?logo=c-sharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?logo=microsoft-sql-server)](https://www.microsoft.com/sql-server)
 [![Entity Framework](https://img.shields.io/badge/Entity%20Framework-Core-512BD4)](https://docs.microsoft.com/ef/core/)
 
@@ -76,7 +76,7 @@ Bancos de sangue precisam gerenciar eficientemente:
 - **Clean Architecture** - Separação de responsabilidades em camadas
 - **Domain-Driven Design (DDD)** - Modelagem rica de domínio
 - **Repository Pattern** - Abstração de acesso a dados
-- **CQRS Pattern** - Separação de comandos e consultas
+- **Fluent Validation** - Validação de entrada de dados dos usuários
 - **Domain Events** - Comunicação assíncrona entre agregados (MediatR)
 - **Dependency Injection** - Inversão de controle
 - **Result Pattern** - Tratamento de erros e validações
@@ -86,8 +86,8 @@ Bancos de sangue precisam gerenciar eficientemente:
 ## 🛠️ Stack Tecnológico
 
 ### Backend
-- **ASP.NET Core 8.0** - Framework web
-- **C# 12** - Linguagem de programação
+- **ASP.NET Core 10.0** - Framework web
+- **C# 14** - Linguagem de programação
 - **Entity Framework Core** - ORM
 - **SQL Server** - Banco de dados
 - **MediatR** - Mediator pattern para eventos de domínio
@@ -107,7 +107,7 @@ Bancos de sangue precisam gerenciar eficientemente:
 ## 🚀 Como Executar
 
 ### Pré-requisitos
-- [.NET 8.0 SDK](https://dotnet.microsoft.com/download)
+- [.NET 10.0 SDK](https://dotnet.microsoft.com/download)
 - [SQL Server](https://www.microsoft.com/sql-server) ou SQL Server Express
 - IDE: Visual Studio 2022+ ou Visual Studio Code
 
@@ -295,10 +295,8 @@ Projeto-BancoDeSangue-API/
 
 **Bruno Régis**
 
-- 💼 LinkedIn: [Adicione seu LinkedIn aqui]
-- 📧 Email: [Adicione seu email aqui]
-- 🌐 Portfolio: [Adicione seu portfolio aqui]
-
+- 💼 LinkedIn: [https://www.linkedin.com/in/bruno-regis-netto]
+  
 ---
 
 ## 📄 Licença
